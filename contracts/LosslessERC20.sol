@@ -119,6 +119,8 @@ contract LosslessERC20 is ERC20Upgradeable {
         require(keccak256(key) == recoveryAdminKeyHash, "LERC20: Invalid key");
         emit RecoveryAdminChanged(recoveryAdmin, recoveryAdminCanditate);
         recoveryAdmin = recoveryAdminCanditate;
+        recoveryAdminCanditate = address(0);
+        recoveryAdminKeyHash = bytes32(0);
     }
 
     function proposeLosslessTurnOff() external onlyRecoveryAdmin {
