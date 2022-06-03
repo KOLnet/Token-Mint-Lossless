@@ -51,6 +51,11 @@ contract Token is
     }
     
     function initialize(address _admin, address _recoveryAdmin, uint256 _timelockPeriod, ILosslessController _lossless) public virtual initializer {
+        require(_admin != address(0), "admin required for Lossless");
+        require(_recoveryAdmin != address(0), "recoveryAdmin required for Lossless");
+        require(address(_lossless) != address(0), "lossless controller required for Lossless");
+        require(_timelockPeriod >= 86400, "timelockPeriod should be greater than 24 hrs");
+
         __Token_init(NAME, SYMBOL, _admin, _recoveryAdmin, _timelockPeriod, _lossless);
     }
 
