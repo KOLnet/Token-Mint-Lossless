@@ -131,9 +131,7 @@ contract Token is
     }
 
     function grantRole(bytes32 role, address account) public override(AccessControlUpgradeable) {
-        if(role == BLACKLIST_MANAGER_ROLE || role == DEFAULT_ADMIN_ROLE) {
-            require(!hasRole(BLACKLISTED_ROLE, account), "can not assign role to blacklisted");
-        }
+        require(!hasRole(BLACKLISTED_ROLE, account), "can not assign role to blacklisted");
         super.grantRole(role, account);
     }
 
